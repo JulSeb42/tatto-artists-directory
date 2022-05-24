@@ -1,10 +1,8 @@
-// Packages
+// Imports
 import React, { useState, useEffect, createContext } from "react"
 
-// API
 import authService from "../api/auth.service"
 
-// Create context
 const AuthContext = createContext()
 
 const AuthProviderWrapper = ({ children }) => {

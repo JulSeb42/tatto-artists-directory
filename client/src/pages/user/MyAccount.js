@@ -1,13 +1,11 @@
-// Packages
+// Imports
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { Font } from "tsx-library-julseb"
-import { getFirstName } from "ts-utils-julseb"
+import { getFirstName } from "js-utils-julseb"
 
-// API
 import { AuthContext } from "../../context/auth"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const MyAccount = () => {

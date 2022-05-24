@@ -1,14 +1,12 @@
-// Packages
+// Imports
 import React, { useContext, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { Button } from "tsx-library-julseb"
 
-// API
 import { AuthContext } from "../../../context/auth"
 
-// Data
 import siteData from "../../../data/siteData"
 
-// Styles
 import { Container, MenuButton, Nav, MenuLinkStyled } from "./styles"
 
 const Header = () => {
@@ -17,36 +15,11 @@ const Header = () => {
     // Mobile menu
     const [isOpen, setIsOpen] = useState(false)
 
-    // Menu link component => fix `as` prop with emotion
-    const MenuLink = ({
-        to,
-        logo,
-        children,
-        onClick,
-    }) => {
-        return (
-            <MenuLinkStyled
-                as={
-                    to && logo
-                        ? Link
-                        : to && !logo
-                        ? NavLink
-                        : "button"
-                }
-                to={to}
-                logo={logo}
-                onClick={onClick && onClick}
-            >
-                {children}
-            </MenuLinkStyled>
-        )
-    }
-
     return (
         <Container>
-            <MenuLink to="/" logo>
+            <MenuLinkStyled as={Link} to="/" logo>
                 {siteData.name}
-            </MenuLink>
+            </MenuLinkStyled>
 
             <MenuButton
                 width={28}
@@ -57,19 +30,21 @@ const Header = () => {
             />
 
             <Nav isOpen={isOpen}>
-                <MenuLink to="/">Home</MenuLink>
+                <MenuLinkStyled to="/">Home</MenuLinkStyled>
 
                 {isLoggedIn ? (
                     <>
-                        <MenuLink to="/my-account">My account</MenuLink>
+                        <Button to="/new-artist">Add a new artist</Button>
+                        
+                        <MenuLinkStyled as={NavLink} to="/my-account">My account</MenuLinkStyled>
 
-                        <MenuLink onClick={logoutUser}>Log out</MenuLink>
+                        <MenuLinkStyled as="button" onClick={logoutUser}>Log out</MenuLinkStyled>
                     </>
                 ) : (
                     <>
-                        <MenuLink to="/signup">Sign up</MenuLink>
+                        <MenuLinkStyled to="/signup">Sign up</MenuLinkStyled>
 
-                        <MenuLink to="/login">Login</MenuLink>
+                        <MenuLinkStyled to="/login">Login</MenuLinkStyled>
                     </>
                 )}
             </Nav>

@@ -8,23 +8,20 @@ const userSchema = new Schema(
             required: true,
             unique: true,
         },
-
         fullName: {
             type: String,
             required: true,
         },
-
+        password: String,
+        verified: Boolean,
+        verifyToken: String,
+        resetToken: String,
         artists: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Artist",
             },
         ],
-        city: String,
-        password: String,
-        verified: Boolean,
-        verifyToken: String,
-        resetToken: String,
     },
     {
         // this second object adds extra properties: `createdAt` and `updatedAt`

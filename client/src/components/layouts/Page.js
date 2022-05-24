@@ -1,15 +1,21 @@
-// Packages
+// Imports
 import React from "react"
 import PropTypes from "prop-types"
 import { Helmet, Wrapper, Main } from "tsx-library-julseb"
 
-// Components
 import Header from "./Header"
 
-// Data
 import siteData from "../../data/siteData"
 
-const Page = ({ title, description, keywords, cover, template, children }) => {
+const Page = ({
+    title,
+    description,
+    keywords,
+    cover,
+    template = "1col",
+    children,
+    mainWidth,
+}) => {
     return (
         <>
             <Helmet
@@ -26,8 +32,12 @@ const Page = ({ title, description, keywords, cover, template, children }) => {
 
             <Header />
 
-            <Wrapper template={template}>
-                <Main template={template}>{children}</Main>
+            <Wrapper template={template || "1col"}>
+                {template === "1col" ? (
+                    <Main width={mainWidth}>{children}</Main>
+                ) : (
+                    children
+                )}
             </Wrapper>
         </>
     )
@@ -39,6 +49,7 @@ Page.propTypes = {
     keywords: PropTypes.array,
     cover: PropTypes.string,
     template: PropTypes.string,
+    mainWidth: PropTypes.number,
     children: PropTypes.any,
 }
 

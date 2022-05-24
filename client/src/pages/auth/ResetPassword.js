@@ -1,13 +1,11 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Font, Form, Input, Alert } from "tsx-library-julseb"
-import { passwordRegex } from "ts-utils-julseb"
+import { passwordRegex } from "js-utils-julseb"
 
-// API
 import authService from "../../api/auth.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const ResetPassword = () => {
@@ -50,7 +48,7 @@ const ResetPassword = () => {
     }
 
     return (
-        <Page title={title} template="form">
+        <Page title={title} mainWidth={400}>
             <Font.H1>{title}</Font.H1>
 
             <Form btnPrimary="Reset your password" onSubmit={handleSubmit}>

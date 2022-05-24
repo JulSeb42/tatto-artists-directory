@@ -1,13 +1,10 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Font, Form, Input, Alert } from "tsx-library-julseb"
-import { getRandomString } from "ts-utils-julseb"
 
-// API
 import authService from "../../api/auth.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const ForgotPassword = () => {
@@ -26,7 +23,7 @@ const ForgotPassword = () => {
     const handleSubmit = e => {
         e.preventDefault()
 
-        const requestBody = { email, resetToken: getRandomString(20) }
+        const requestBody = { email }
 
         authService
             .forgotPassword(requestBody)
@@ -40,7 +37,7 @@ const ForgotPassword = () => {
     }
 
     return (
-        <Page title={title} template="form">
+        <Page title={title} mainWidth={400}>
             <Font.H1>{title}</Font.H1>
 
             <Font.P>

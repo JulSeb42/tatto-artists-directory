@@ -1,4 +1,4 @@
-// Server
+// Imports
 import http from "./http-common"
 
 class ArtistService {

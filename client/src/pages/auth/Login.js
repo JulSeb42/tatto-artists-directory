@@ -1,13 +1,11 @@
-// Packages
+// Imports
 import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Font, Form, Input, Alert } from "tsx-library-julseb"
 
-// API
 import { AuthContext } from "../../context/auth"
 import authService from "../../api/auth.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const Login = () => {
@@ -41,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <Page title="Login" template="form">
+        <Page title="Login" mainWidth={400}>
             <Font.H1>Log in</Font.H1>
 
             <Form btnPrimary="Login" onSubmit={handleSubmit}>

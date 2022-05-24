@@ -1,9 +1,8 @@
-// Packages
+// Imports
 import React from "react"
 import { Link } from "react-router-dom"
 import { Font } from "tsx-library-julseb"
 
-// Components
 import Page from "../components/layouts/Page"
 
 const NotFound = () => {

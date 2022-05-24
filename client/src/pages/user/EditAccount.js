@@ -1,4 +1,4 @@
-// Packages
+// Imports
 import React, { useContext, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { Font, Form, Input, Alert } from "tsx-library-julseb"
@@ -57,7 +57,7 @@ const EditAccount = ({ edited, setEdited }) => {
     }
 
     return (
-        <Page title="Edit your account" template="form">
+        <Page title="Edit your account" mainWidth={400}>
             <Font.H1>Edit your account</Font.H1>
 
             <Form btnPrimary="Save changes" onSubmit={handleSubmit}>

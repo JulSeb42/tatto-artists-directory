@@ -17,6 +17,9 @@ import MyAccount from "../pages/user/MyAccount"
 import EditAccount from "../pages/user/EditAccount"
 import EditPassword from "../pages/user/EditPassword"
 
+// Artists
+import NewArtist from "../pages/artists/NewArtist"
+
 // Routes
 const routes = [
     // Basic pages
@@ -114,6 +117,15 @@ const routes = [
         protected: true,
         anon: false,
         edit: true,
+    },
+
+    // Artists
+    {
+        path: "/new-artist",
+        element: NewArtist,
+        protected: true,
+        anon: false,
+        edit: false,
     },
 ]
 

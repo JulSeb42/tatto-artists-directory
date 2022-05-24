@@ -1,8 +1,7 @@
-// Packages
+// Imports
 import React from "react"
 import { Font } from "tsx-library-julseb"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const Goodbye = () => {

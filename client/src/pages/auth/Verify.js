@@ -1,13 +1,11 @@
-// Packages
+// Imports
 import React, { useContext, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Font, PageLoading } from "tsx-library-julseb"
 
-// API
 import { AuthContext } from "../../context/auth"
 import authService from "../../api/auth.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const Verify = ({ edited, setEdited }) => {

@@ -8,6 +8,7 @@ const User = require("../models/User.model")
 // Get all artists
 router.get("/all-artists", (req, res, next) => {
     Artist.find()
+        .populate("user")
         .then(found => res.status(200).json(found))
         .catch(err => next(err))
 })
@@ -15,20 +16,37 @@ router.get("/all-artists", (req, res, next) => {
 // Get artist by id
 router.get("/artist/:id", (req, res, next) => {
     Artist.findById(req.params.id)
+        .populate("user")
         .then(found => res.status(200).json(found))
         .catch(err => next(err))
 })
 
 // New artist
 router.post("/new-artist", (req, res, next) => {
-    const { name, styles, city, picture, poster, instagram } = req.body
+    const {
+        name,
+        styles,
+        city,
+        country,
+        picture,
+        poster,
+        instagram,
+        handpoke,
+        shop,
+    } = req.body
 
     if (!name) {
         return res.status(400).json({ message: "Name is required." })
     }
 
-    if (!styles) {
-        return res.status(400).json({ message: "Styles are required." })
+    if (!styles && !shop) {
+        return res
+            .status(400)
+            .json({ message: "If this is not a shop, add the styles." })
+    }
+
+    if (!country) {
+        return res.status(400).json({ message: "Country is required." })
     }
 
     if (!city) {
@@ -39,7 +57,17 @@ router.post("/new-artist", (req, res, next) => {
         return res.status(400).json({ message: "Instagram link is required." })
     }
 
-    Artist.create({ name, styles, city, picture, poster, instagram })
+    Artist.create({
+        name,
+        styles,
+        city,
+        country,
+        picture,
+        poster,
+        instagram,
+        handpoke,
+        shop,
+    })
         .then(created =>
             User.findByIdAndUpdate(
                 poster,
@@ -54,7 +82,30 @@ router.post("/new-artist", (req, res, next) => {
 
 // Edit artist
 router.put("/edit-artist/:id", (req, res, next) => {
-    const { name, styles, city, picture, instagram } = req.body
+    const { name, styles, city, country, picture, instagram, handpoke, shop } =
+        req.body
+
+    if (!name) {
+        return res.status(400).json({ message: "Name is required." })
+    }
+
+    if (!styles && !shop) {
+        return res
+            .status(400)
+            .json({ message: "If this is not a shop, add the styles." })
+    }
+
+    if (!country) {
+        return res.status(400).json({ message: "Country is required." })
+    }
+
+    if (!city) {
+        return res.status(400).json({ message: "City is required." })
+    }
+
+    if (!instagram) {
+        return res.status(400).json({ message: "Instagram link is required." })
+    }
 
     Artist.findByIdAndUpdate(
         req.params.id,
@@ -62,8 +113,11 @@ router.put("/edit-artist/:id", (req, res, next) => {
             name,
             styles,
             city,
+            country,
             picture,
             instagram,
+            handpoke,
+            shop,
         },
         { new: true }
     )

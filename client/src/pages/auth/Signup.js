@@ -1,39 +1,17 @@
-// Packages
-import React, { useState, useContext, useEffect } from "react"
-import axios from "axios"
+// Imports
+import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Font, Form, Input, Alert, Autocomplete } from "tsx-library-julseb"
-import { getRandomString, passwordRegex } from "ts-utils-julseb"
+import { Font, Form, Input, Alert } from "tsx-library-julseb"
+import { passwordRegex } from "js-utils-julseb"
 
-// API
 import { AuthContext } from "../../context/auth"
 import authService from "../../api/auth.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const Signup = () => {
     const { loginUser } = useContext(AuthContext)
     const navigate = useNavigate()
-
-    // Get all cities
-    const [allCities, setAllCities] = useState([])
-    const [filteredCities, setFilteredCities] = useState("")
-
-    useEffect(() => {
-        axios
-            .get(
-                "https://raw.githubusercontent.com/JulSeb42/js-utils/master/src/allCities.json"
-            )
-            .then(res =>
-                setAllCities(
-                    res.data.map(city => `${city.name}, ${city.country}`)
-                )
-            )
-            .catch(err => console.log(err))
-    }, [])
-
-    console.log(allCities)
 
     // Form items
     const [inputs, setInputs] = useState({
@@ -41,7 +19,6 @@ const Signup = () => {
         email: "",
         password: "",
     })
-    const [city, setCity] = useState("")
     const [validation, setValidation] = useState("not-passed")
     const [errorMessage, setErrorMessage] = useState(undefined)
 
@@ -59,31 +36,12 @@ const Signup = () => {
         }
     }
 
-    const handleFilterLocation = e => {
-        setCity(e.target.value)
-        setFilteredCities(e.target.value)
-    }
-
-    let resultsCities = allCities.filter(city => {
-        return city.toLowerCase().includes(filteredCities.toLowerCase())
-    })
-
-    const handleClickSuggestion = e => {
-        setCity(e.target.innerText)
-    }
-
     // Submit form
     const handleSubmit = e => {
         e.preventDefault()
 
-        const requestBody = {
-            ...inputs,
-            city,
-            verifyToken: getRandomString(20),
-        }
-
         authService
-            .signup(requestBody)
+            .signup(inputs)
             .then(res => {
                 loginUser(res.data.authToken)
                 navigate("/thank-you")
@@ -95,7 +53,7 @@ const Signup = () => {
     }
 
     return (
-        <Page title="Sign up" template="form">
+        <Page title="Sign up" mainWidth={400}>
             <Font.H1>Create an account</Font.H1>
 
             <Form btnPrimary="Create your account" onSubmit={handleSubmit}>
@@ -113,15 +71,6 @@ const Signup = () => {
                     type="email"
                     onChange={handleChange}
                     value={inputs.email}
-                />
-
-                <Autocomplete
-                    label="City"
-                    id="city"
-                    onChange={handleFilterLocation}
-                    value={city}
-                    items={resultsCities}
-                    onMouseDown={handleClickSuggestion}
                 />
 
                 <Input

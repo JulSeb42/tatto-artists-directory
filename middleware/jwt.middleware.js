@@ -1,7 +1,6 @@
-// Package
+// Imports
 const { expressjwt: jwt } = require("express-jwt")
 
-// Middleware
 const isAuthenticated = jwt({
     secret: process.env.TOKEN_SECRET,
     algorithms: ["HS256"],

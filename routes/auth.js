@@ -1,16 +1,13 @@
-// Packages
+// Imports
 const router = require("express").Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
-// Model
 const User = require("../models/User.model")
 
-// Middleware
 const { isAuthenticated } = require("../middleware/jwt.middleware")
 
-// Utils
-const { passwordRegex, emailRegex } = require("ts-utils-julseb")
+const { passwordRegex, emailRegex } = require("js-utils-julseb")
 const jwtConfig = require("../utils/jwtConfig")
 const transporter = require("../utils/transporter")
 

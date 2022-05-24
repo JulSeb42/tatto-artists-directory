@@ -1,12 +1,10 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 
-// Routes
 import routes from "./routes/routes"
 import redirects from "./routes/redirects"
 
-// Utils
 import ProtectedRoutes from "./routes/ProtectedRoutes"
 import AnonRoutes from "./routes/AnonRoutes"
 

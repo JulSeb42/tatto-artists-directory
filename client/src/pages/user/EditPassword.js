@@ -1,14 +1,12 @@
-// Packages
+// Imports
 import React, { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { Font, Form, Input, Alert } from "tsx-library-julseb"
-import { passwordRegex } from "ts-utils-julseb"
+import { passwordRegex } from "js-utils-julseb"
 
-// API
 import { AuthContext } from "../../context/auth"
 import userService from "../../api/user.service"
 
-// Components
 import Page from "../../components/layouts/Page"
 
 const EditPassword = ({ edited, setEdited }) => {
@@ -49,7 +47,7 @@ const EditPassword = ({ edited, setEdited }) => {
     }
 
     return (
-        <Page title={title} template="form">
+        <Page title={title} mainWidth={400}>
             <Font.H1>{title}</Font.H1>
 
             <Form

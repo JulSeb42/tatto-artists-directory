@@ -1,9 +1,8 @@
-// Packages
+// Imports
 import React, { useContext } from "react"
 import { Navigate } from "react-router-dom"
 import { PageLoading } from "tsx-library-julseb"
 
-// Components
 import { AuthContext } from "../context/auth"
 
 const ProtectedRoutes = ({ children, redirectTo }) => {

@@ -1,15 +1,22 @@
-// Packages
+// Imports
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import {
     Button,
     Modal,
     Alert,
-    ButtonsContainer,
     Font,
+    Flexbox,
+    Variables,
 } from "tsx-library-julseb"
 
-const DangerZone = ({ textBtnOpen, text, onClickPrimary, textBtnPrimary }) => {
+const DangerZone = ({
+    textBtnOpen,
+    text,
+    onClickPrimary,
+    textBtnPrimary,
+    textBtnCancel = "No, cancel",
+}) => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
@@ -22,11 +29,11 @@ const DangerZone = ({ textBtnOpen, text, onClickPrimary, textBtnPrimary }) => {
                 {textBtnOpen}
             </Button>
 
-            <Modal open={isOpen}>
-                <Alert color="danger">
+            <Modal isOpen={isOpen}>
+                <Alert color="danger" modal>
                     <Font.P>{text}</Font.P>
 
-                    <ButtonsContainer>
+                    <Flexbox gap={Variables.Spacers.XS}>
                         <Button color="danger" onClick={onClickPrimary}>
                             {textBtnPrimary}
                         </Button>
@@ -35,9 +42,9 @@ const DangerZone = ({ textBtnOpen, text, onClickPrimary, textBtnPrimary }) => {
                             btnStyle="text"
                             onClick={() => setIsOpen(false)}
                         >
-                            No, cancel
+                            {textBtnCancel}
                         </Button>
-                    </ButtonsContainer>
+                    </Flexbox>
                 </Alert>
             </Modal>
         </>
@@ -49,6 +56,7 @@ DangerZone.propTypes = {
     text: PropTypes.string.isRequired,
     onClickPrimary: PropTypes.func.isRequired,
     textBtnPrimary: PropTypes.string.isRequired,
+    textBtnCancel: PropTypes.string,
 }
 
 export default DangerZone

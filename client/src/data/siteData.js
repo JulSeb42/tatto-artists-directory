@@ -1,6 +1,6 @@
 // Global data
 const siteData = {
-    name: "App name",
+    name: "Tattoo artist finder",
     favicon: "",
     email: "",
     author: "",
